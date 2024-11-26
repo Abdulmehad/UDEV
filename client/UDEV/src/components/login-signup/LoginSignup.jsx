@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faGlobeOceania } from '@fortawesome/free-solid-svg-icons';
 import InputMask from 'react-input-mask';
@@ -9,6 +9,16 @@ import person from '../assets/person.png';
 
 const LoginSignup = () => {
   const [action, setAction] = useState("Sign Up");
+  const[employee,setEmployee]=useState([]);
+  useEffect(()=>{
+    fetchEmployee();
+  },[])
+
+  const fetchEmployee=async()=>{  
+  const response=await fetch('http://localhost:3300/employeeDetail');
+  const data=await response.json();
+  setEmployee(data);
+  }
   return (
     <div>
       <div className="container">
